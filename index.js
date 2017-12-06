@@ -11,7 +11,7 @@ function getRandomInt(min, max) {
 }
 
 
-var slack = new SlackWebhook()
+var slack = new SlackWebhook(process.env['SLACK_WEBHOOK_URL'])
 var capecId = getRandomInt(1,508);
 console.log(`https://capec.mitre.org/data/definitions/${capecId}.html`);
 
@@ -33,6 +33,10 @@ request(`https://capec.mitre.org/data/definitions/${capecId}.html`, function (er
         ],
         username: 'CAPEC',
         icon_emoji: ':scream_cat:',
+      }).then(function(){
+          console.log("done");
+      }).catch(function(err){
+          console.log(err);
       })
 
 });
